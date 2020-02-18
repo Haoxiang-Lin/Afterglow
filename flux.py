@@ -191,8 +191,8 @@ def int_range(Eiso0, Gamma0, energy, time, theta_obs, D_L):
     return [int_l, int_r, int_h]
 
 # integrate total energy flux [erg s^-1 cm^-2] on the equal time arrival surface (smart integral)
-def structure_smart(Eiso0, Gamma0, energy, time, theta_obs, D_L, int_params):
-    int_l, int_r, int_h = int_params
+def structure_smart(Eiso0, Gamma0, energy, time, theta_obs, D_L, int_config):
+    int_l, int_r, int_h = int_config
     
     integrand = lambda theta, phi: np.sin(theta)/(4*np.pi) * tophat(Eiso0(theta), Gamma0(theta), energy, time, np.arccos(mu(theta, phi, theta_obs)), D_L).to_value(u.erg/u.cm**2/u.s)
     theta_l = np.linspace(int_l, int_r, 4)
