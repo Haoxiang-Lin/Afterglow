@@ -35,13 +35,17 @@ mec2 = m_e*c**2
 # Other parameters
 # alpha_stf: power index of radial velocity stratification, eiso_u ~ u^(-alpha_stf)
 # n_amb: ambient particle density
+# eps_B, eps_e: microphysical parameters
 # p_e: power index of electron distribution
-# zeta_e: acceleration efficiency
+# zeta_e: accelerated number fraction of (external) electrons
 alpha_stf, n_amb, eps_B, eps_e, p_e, zeta_e = np.inf, 0.01*pcm, 0.01, 0.1, 2.2, 0.1
 
 mu = lambda theta, phi, theta_obs: np.sin(theta)*np.cos(phi)*np.sin(theta_obs) + np.cos(theta)*np.cos(theta_obs)
 
-# return isotropic equivalent energy flux [erg s^-1 cm^-2] from the coordinate (theta, phi) on the equal time arrival surface
+# return isotropic equivalent energy flux [erg s^-1 cm^-2] from the coordinate (theta, phi) 
+# on the equal time arrival surface of an infinitestimal tophat jet.
+# E0, g0: initial isotropic energy & Lorentz factor
+# energy: observed energy (e.g. 3*u.GHz*h); time: observed time after merger
 def tophat(E0, g0, energy, time, theta_obs, D_L):
     mu_obs = np.cos(theta_obs)
     z = z_at_value(Planck15.luminosity_distance, D_L)
