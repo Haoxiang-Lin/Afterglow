@@ -23,7 +23,7 @@ import warnings
 __all__ = [
     "tophat",
     "structure",
-    "int_range",
+    "int_config",
     "structure_smart",
 ]
 
@@ -151,7 +151,7 @@ def structure(Eiso0, Gamma0, energy, time, theta_obs, D_L):
     return dblquad(integrand, -np.pi, np.pi, 0, np.pi)[0] * u.erg/u.cm**2/u.s
 
 # find effective integral range (WARNING: still very empirical)
-def int_range(Eiso0, Gamma0, energy, time, theta_obs, D_L):
+def int_config(Eiso0, Gamma0, energy, time, theta_obs, D_L):
     
     warnings.simplefilter('ignore', RuntimeWarning)
 
