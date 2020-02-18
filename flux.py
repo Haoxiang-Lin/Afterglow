@@ -144,13 +144,13 @@ def tophat(E0, g0, energy, time, theta_obs, D_L):
 # Eiso0 = lambda theta: 10**(51) * u.erg * np.exp(-(theta/0.1)**2/2)
 # Gamma0 = lambda theta: 1 + (300-1) * np.exp(-(theta/0.1)**2/2)
 
-# integrate total energy flux [erg s^-1 cm^-2] on the equal time arrival surface
+# integrate total energy flux [erg s^-1 cm^-2] of a structured jet
 def structure(Eiso0, Gamma0, energy, time, theta_obs, D_L):
     
     integrand = lambda theta, phi: np.sin(theta)/(4*np.pi) * tophat(Eiso0(theta), Gamma0(theta), energy, time, np.arccos(mu(theta, phi, theta_obs)), D_L).to_value(u.erg/u.cm**2/u.s)
     return dblquad(integrand, -np.pi, np.pi, 0, np.pi)[0] * u.erg/u.cm**2/u.s
 
-# find effective integral range
+# find effective integral range (WARNING: still very empirical)
 def int_range(Eiso0, Gamma0, energy, time, theta_obs, D_L):
     
     warnings.simplefilter('ignore', RuntimeWarning)
@@ -194,7 +194,7 @@ def int_range(Eiso0, Gamma0, energy, time, theta_obs, D_L):
     
     return [int_l, int_r, int_h]
 
-# integrate total energy flux [erg s^-1 cm^-2] on the equal time arrival surface (smart integral)
+# integrate total energy flux [erg s^-1 cm^-2] of a structured jet (smart integral)
 def structure_smart(Eiso0, Gamma0, energy, time, theta_obs, D_L, int_config):
     int_l, int_r, int_h = int_config
     
