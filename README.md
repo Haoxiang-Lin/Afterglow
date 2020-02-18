@@ -6,3 +6,7 @@ https://www.anaconda.com/distribution/
 
 You also need “naima”, the package for computing non-thermal radiation from relativistic particle distribution:
 https://naima.readthedocs.io/
+You can install it via Anaconda by:
+
+$ conda config —add channels astropy
+$ conda install naima
